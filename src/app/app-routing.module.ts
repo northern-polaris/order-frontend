@@ -9,7 +9,8 @@ const routes: Routes = [
   {path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
   {path: 'order', loadChildren: () => import('./order/order.module').then(m => m.OrderModule)},
 
-  {path: '**', redirectTo: 'product/list', pathMatch: 'full'}
+  {path: 'agent', loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)},
+  {path: '**', redirectTo: 'product/list', pathMatch: 'full'},
 
 ];
 
