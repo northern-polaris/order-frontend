@@ -15,5 +15,9 @@ export class ProductService {
     return this.http.get<any>(environment.apiHost + 'product/list/');
   }
 
+  postProduct(product): Observable<any> {
+    return this.http.post<any>(environment.apiHost + 'product/list/', product);
+
+  }
 
 }
