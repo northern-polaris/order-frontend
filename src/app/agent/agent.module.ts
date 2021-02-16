@@ -6,10 +6,11 @@ import { SellerListComponent } from './seller-list/seller-list.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { CustomerListComponent } from './customer-list/customer-list.component';
 
 
 @NgModule({
-  declarations: [SellerListComponent],
+  declarations: [SellerListComponent, CustomerListComponent],
   imports: [
     CommonModule,
     AgentRoutingModule,

@@ -10,4 +10,5 @@ export class AppComponent {
 
   productListPath = 'product/list';
   sellerListPath = 'agent/seller/list';
+  customerListPath = 'agent/customer/list';
 }
