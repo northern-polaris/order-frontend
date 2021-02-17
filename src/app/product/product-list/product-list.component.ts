@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
   count;
 
 
-  displayedColumns: string[] = ['id', 'name', 'default_price', 'description', 'product_category'];
+  displayedColumns: string[] = ['id', 'name', 'default_price', 'description', 'product_category', 'update', 'delete'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,5 +46,10 @@ export class ProductListComponent implements OnInit {
   navigate(): void {
     this.router.navigate(['product/form']).then();
 
+  }
+
+  update(id): void {
+    // this.router.navigate(['product/form'], id).then();
+    this.router.navigate(['product/form', id]).then();
   }
 }
