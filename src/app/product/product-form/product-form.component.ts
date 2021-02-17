@@ -34,7 +34,7 @@ export class ProductFormComponent implements OnInit {
 
       }
     );
-
+    // get if from url
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
       this.productService.retrieveProduct(this.id).subscribe(response => {
