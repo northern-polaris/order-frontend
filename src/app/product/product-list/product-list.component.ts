@@ -42,7 +42,8 @@ export class ProductListComponent implements OnInit {
 
 
   }
-  navigate(): void{
+
+  navigate(): void {
     this.router.navigate(['product/form']).then();
 
   }

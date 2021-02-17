@@ -9,19 +9,23 @@ import {ProductService} from '../product.service';
 })
 export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
+  categories = [];
 
   constructor(public fb: FormBuilder, protected productService: ProductService) {
   }
 
   ngOnInit(): void {
+    this.getCategories();
     this.productForm = this.fb.group({
         name: ['', Validators.required],
         default_price: ['', Validators.required],
         description: ['', Validators.required],
         // product_category: ['', Validators.required],
-        product_category: [[1], Validators.required],
+        product_category: [null, Validators.required],
+
       }
     );
+
   }
 
   submit(): void {
@@ -29,6 +33,14 @@ export class ProductFormComponent implements OnInit {
     this.productService.postProduct(serializedForm).subscribe(response => {
       console.log(response);
     });
+  }
+
+  getCategories() {
+    this.productService.getCategoryList().subscribe(response => {
+      this.categories = response['results'];
+
+    });
+
   }
 
 }

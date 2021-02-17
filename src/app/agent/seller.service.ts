@@ -13,5 +13,10 @@ export class SellerService {
   getSellerList(pageIndex): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'agent/seller/' + `?page=${pageIndex + 1}`);
   }
+  postSeller(seller): Observable<any> {
+    return this.http.post<any>(environment.apiHost + 'agent/seller/form/', seller);
+
+  }
+
 
 }

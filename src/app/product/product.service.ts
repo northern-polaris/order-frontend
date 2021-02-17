@@ -12,12 +12,16 @@ export class ProductService {
   }
 
   getProductList(): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'product/list/');
+    return this.http.get<any>(environment.apiHost + 'product/list/' );
   }
 
   postProduct(product): Observable<any> {
     return this.http.post<any>(environment.apiHost + 'product/list/', product);
 
+  }
+
+  getCategoryList(): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'product/list/category/');
   }
 
 }

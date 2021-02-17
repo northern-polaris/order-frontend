@@ -3,6 +3,7 @@ import {SellerService} from '../seller.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-seller-list',
@@ -21,7 +22,7 @@ export class SellerListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(protected sellerService: SellerService) {
+  constructor(protected sellerService: SellerService, private router: Router,) {
 
   }
 
@@ -31,9 +32,12 @@ export class SellerListComponent implements OnInit {
         this.sellerList = response['results'];
         this.count = response['count'];
         this.dataSource = response['results'];
-        console.log('hemi ne faqen',);
-      }
-    );
+      });
+  }
+
+  navigate(): void {
+    this.router.navigate(['seller/form']).then();
+
   }
 
 }
