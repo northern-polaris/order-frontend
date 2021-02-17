@@ -9,14 +9,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {ProductFormComponent} from './product-form/product-form.component';
 import {MatButtonModule} from '@angular/material/button';
-import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import {MatSelectModule} from '@angular/material/select';
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule,
     ]
 })
 export class ProductModule {

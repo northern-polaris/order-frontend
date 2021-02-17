@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../product.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -11,8 +13,10 @@ export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
   categories = [];
 
-  constructor(public fb: FormBuilder, protected productService: ProductService) {
-  }
+  constructor(public fb: FormBuilder,
+              protected productService: ProductService,
+              private snackBar: MatSnackBar,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.getCategories();
@@ -31,11 +35,18 @@ export class ProductFormComponent implements OnInit {
   submit(): void {
     const serializedForm = Object.assign({}, this.productForm.value);
     this.productService.postProduct(serializedForm).subscribe(response => {
-      console.log(response);
-    });
+        this.snackBar.open('Shtimi u krye me sukses', 'close', {
+          duration: 5000,
+        });
+        this.router.navigate(['product/list']).then();
+      },
+      onError => {
+        console.log(onError);
+      }
+    );
   }
 
-  getCategories() {
+  getCategories(): void {
     this.productService.getCategoryList().subscribe(response => {
       this.categories = response['results'];
 
