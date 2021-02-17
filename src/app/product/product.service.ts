@@ -12,7 +12,7 @@ export class ProductService {
   }
 
   getProductList(): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'product/list/' );
+    return this.http.get<any>(environment.apiHost + 'product/list/');
   }
 
   postProduct(product): Observable<any> {
@@ -22,6 +22,14 @@ export class ProductService {
 
   getCategoryList(): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'product/list/category/');
+  }
+
+  retrieveProduct(id): Observable<any> {
+    return this.http.get<any>(environment.apiHost + `product/list/${id}/`);
+  }
+
+  putProduct(product): Observable<any> {
+    return this.http.put<any>(environment.apiHost + `product/list/${product.id}/`, product);
   }
 
 }

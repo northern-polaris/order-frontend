@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -12,11 +12,16 @@ import {Router} from '@angular/router';
 export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
   categories = [];
+  id: number;
 
   constructor(public fb: FormBuilder,
               protected productService: ProductService,
               private snackBar: MatSnackBar,
-              private router: Router) {}
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+  ) {
+  }
+
 
   ngOnInit(): void {
     this.getCategories();
@@ -30,20 +35,47 @@ export class ProductFormComponent implements OnInit {
       }
     );
 
+    this.id = +this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.productService.retrieveProduct(this.id).subscribe(response => {
+          this.productForm.patchValue(response);
+        }
+      );
+
+    }
+
   }
+
 
   submit(): void {
     const serializedForm = Object.assign({}, this.productForm.value);
-    this.productService.postProduct(serializedForm).subscribe(response => {
-        this.snackBar.open('Shtimi u krye me sukses', 'close', {
+
+    if (this.id) {
+      //  Update request
+      serializedForm.id = this.id;
+      this.productService.putProduct(serializedForm).subscribe(response => {
+        this.snackBar.open('Perditesimi u krye me sukses', 'close', {
           duration: 5000,
         });
         this.router.navigate(['product/list']).then();
-      },
-      onError => {
-        console.log(onError);
-      }
-    );
+
+      });
+
+
+    } else {
+      //  Post request
+      this.productService.postProduct(serializedForm).subscribe(response => {
+          this.snackBar.open('Shtimi u krye me sukses', 'close', {
+            duration: 5000,
+          });
+          this.router.navigate(['product/list']).then();
+        },
+        onError => {
+          console.log(onError);
+        }
+      );
+    }
+
   }
 
   getCategories(): void {
