@@ -27,5 +27,8 @@ export class SellerService {
     return this.http.put<any>(environment.apiHost + `agent/seller/${seller.id}/`, seller);
   }
 
+  deleteSeller(id): Observable<any> {
+    return this.http.delete(environment.apiHost + `agent/seller/${id}/`);
+  }
 
 }

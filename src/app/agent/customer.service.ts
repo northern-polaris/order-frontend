@@ -26,4 +26,8 @@ export class CustomerService {
   putCustomer(customer): Observable<any> {
     return this.http.put<any>(environment.apiHost + `agent/customer/${customer.id}/`, customer);
   }
+  deleteCustomer(id): Observable<any> {
+    return this.http.delete(environment.apiHost + `agent/customer/${id}/`);
+  }
+
 }

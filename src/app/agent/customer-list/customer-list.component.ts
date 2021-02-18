@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-customer-list',
@@ -21,7 +22,9 @@ export class CustomerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(protected customerService: CustomerService, private router: Router) {
+  constructor(protected customerService: CustomerService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -42,6 +45,19 @@ export class CustomerListComponent implements OnInit {
 
   update(id): void {
     this.router.navigate(['customer/form', id]).then();
+  }
+
+  delete(id): void {
+    this.customerService.deleteCustomer(id).subscribe(response => {
+
+      this.snackBar.open('Perditesimi u krye me sukses', 'close', {
+        duration: 5000,
+        panelClass: ['on-delete-snackbar'],
+      });
+      // on_success deletion, we update table with updated data from backend
+      this.ngOnInit();
+
+    });
   }
 
 }
