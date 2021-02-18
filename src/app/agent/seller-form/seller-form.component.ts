@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProductService} from '../../product/product.service';
 import {SellerService} from '../seller.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-seller-form',
@@ -10,8 +11,13 @@ import {SellerService} from '../seller.service';
 })
 export class SellerFormComponent implements OnInit {
   sellerForm: FormGroup;
+  id: number;
 
-  constructor(public fb: FormBuilder, protected agentService: SellerService) {
+  constructor(public fb: FormBuilder,
+              protected agentService: SellerService,
+              private snackBar: MatSnackBar,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -21,13 +27,49 @@ export class SellerFormComponent implements OnInit {
       last_name: ['', Validators.required],
       email: ['', Validators.required],
     });
+
+    // get if from url
+    this.id = +this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.agentService.retrieveSeller(this.id).subscribe(response => {
+          this.sellerForm.patchValue(response);
+        }
+      );
+
+    }
+
+
   }
 
   submit(): void {
     const serializedForm = Object.assign({}, this.sellerForm.value);
-    this.agentService.postSeller(serializedForm).subscribe(response => {
-      console.log(response);
-    });
+
+    if (this.id) {
+      //  Update request
+      serializedForm.id = this.id;
+      this.agentService.putSeller(serializedForm).subscribe(response => {
+        this.snackBar.open('Perditesimi u krye me sukses', 'close', {
+          duration: 5000,
+        });
+        this.router.navigate(['seller/list']).then();
+
+      });
+
+
+    } else {
+      //  Post request
+      this.agentService.postSeller(serializedForm).subscribe(response => {
+          this.snackBar.open('Shtimi u krye me sukses', 'close', {
+            duration: 5000,
+          });
+          this.router.navigate(['seller/list']).then();
+        },
+        onError => {
+          console.log(onError);
+        }
+      );
+    }
   }
+
 
 }
