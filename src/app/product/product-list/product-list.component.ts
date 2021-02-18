@@ -3,8 +3,6 @@ import {ProductService} from '../product.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -27,8 +25,7 @@ export class ProductListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(protected productService: ProductService, private router: Router,
-  ) {
+  constructor(protected productService: ProductService, private router: Router) {
   }
 
   ngOnInit(): void {
