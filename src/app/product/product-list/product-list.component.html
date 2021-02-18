@@ -65,7 +65,8 @@
 
 
   </table>
-  <mat-paginator [length]="count" [pageSize]="10" #paginator
-  ></mat-paginator>
+  <mat-paginator [length]="count" [pageSize]="10" #paginator (page)="getProductList()" >
+
+  </mat-paginator>
 
 </div>

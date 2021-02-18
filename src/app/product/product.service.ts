@@ -11,8 +11,8 @@ export class ProductService {
   constructor(protected http: HttpClient) {
   }
 
-  getProductList(): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'product/list/');
+  getProductList(pageIndex): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'product/list/' + `?page=${pageIndex + 1}`);
   }
 
   postProduct(product): Observable<any> {

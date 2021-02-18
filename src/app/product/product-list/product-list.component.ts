@@ -32,13 +32,19 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.getProductList().subscribe(
+    this.getProductList();
+
+  }
+
+  getProductList(): void {
+    this.productService.getProductList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
       response => {
         this.productList = response['results'];
         this.count = response['count'];
         this.dataSource = response['results'];
         console.log(response);
       });
+
   }
 
   navigate(): void {
