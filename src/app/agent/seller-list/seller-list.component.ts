@@ -15,14 +15,14 @@ export class SellerListComponent implements OnInit {
   pageSize = 10;
   count;
 
-  displayedColumns: string[] = ['id', 'username', 'first_name', 'last_name', 'email'];
+  displayedColumns: string[] = ['id', 'username', 'first_name', 'last_name', 'email', 'update', 'delete'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(protected sellerService: SellerService, private router: Router,) {
+  constructor(protected sellerService: SellerService, private router: Router) {
 
   }
 
@@ -38,6 +38,9 @@ export class SellerListComponent implements OnInit {
   navigate(): void {
     this.router.navigate(['seller/form']).then();
 
+  }
+  update(id): void {
+    this.router.navigate(['seller/form', id]).then();
   }
 
 }
