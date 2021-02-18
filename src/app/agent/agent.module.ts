@@ -17,10 +17,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {SellerFormComponent} from './seller-form/seller-form.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {CustomerFormComponent} from './customer-form/customer-form.component';
 
 
 @NgModule({
-  declarations: [SellerListComponent, CustomerListComponent, SellerFormComponent],
+  declarations: [SellerListComponent, CustomerListComponent, SellerFormComponent, CustomerFormComponent],
   imports: [
     AgentRoutingModule,
     CommonModule,

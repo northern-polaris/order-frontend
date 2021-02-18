@@ -3,6 +3,7 @@ import {CustomerService} from '../customer.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
@@ -14,13 +15,13 @@ export class CustomerListComponent implements OnInit {
   pageSize = 10;
   count;
 
-  displayedColumns: string[] = ['id', 'first_name', 'last_name', 'company_name'];
+  displayedColumns: string[] = ['id', 'first_name', 'last_name', 'company_name', 'update', 'delete'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(protected customerService: CustomerService) {
+  constructor(protected customerService: CustomerService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,6 +33,15 @@ export class CustomerListComponent implements OnInit {
         console.log('Done');
       }
     );
+  }
+
+  navigate(): void {
+    this.router.navigate(['customer/form']).then();
+
+  }
+
+  update(id): void {
+    this.router.navigate(['customer/form', id]).then();
   }
 
 }
