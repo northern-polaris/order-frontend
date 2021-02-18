@@ -32,4 +32,8 @@ export class ProductService {
     return this.http.put<any>(environment.apiHost + `product/list/${product.id}/`, product);
   }
 
+  deleteProduct(id): Observable<any> {
+    return this.http.delete(environment.apiHost + `product/list/${id}/`);
+  }
+
 }
