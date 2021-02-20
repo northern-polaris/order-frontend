@@ -15,7 +15,7 @@ export class CustomerService {
     return this.http.get<any>(environment.apiHost + 'agent/customer/' +  `?page=${pageIndex + 1}`);
   }
   postCustomer(customer): Observable<any> {
-    return this.http.post<any>(environment.apiHost + 'agent/customer/form/', customer);
+    return this.http.post<any>(environment.apiHost + 'agent/customer/', customer);
 
   }
 
