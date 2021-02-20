@@ -28,12 +28,18 @@ export class SellerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSellerList();
+
+  }
+
+  getSellerList(): void {
     this.sellerService.getSellerList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
       response => {
         this.sellerList = response['results'];
         this.count = response['count'];
         this.dataSource = response['results'];
       });
+
   }
 
   navigate(): void {

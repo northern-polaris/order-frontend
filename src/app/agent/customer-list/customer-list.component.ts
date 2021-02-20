@@ -28,14 +28,19 @@ export class CustomerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCustomerList();
+
+  }
+
+  getCustomerList(): void {
     this.customerService.getCustomerList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
       response => {
         this.customerList = response['result'];
         this.count = response['count'];
         this.dataSource = response['results'];
-        console.log('Done');
       }
     );
+
   }
 
   navigate(): void {

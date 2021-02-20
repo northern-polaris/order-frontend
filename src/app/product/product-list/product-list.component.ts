@@ -42,7 +42,6 @@ export class ProductListComponent implements OnInit {
         this.productList = response['results'];
         this.count = response['count'];
         this.dataSource = response['results'];
-        console.log(response);
       });
 
   }

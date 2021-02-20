@@ -1,7 +1,7 @@
-<button mat-raised-button color="primary"  layout-align = "center center"(click)="navigate() ">Shto shites</button>
+<button mat-raised-button color="primary" layout-align="center center" (click)="navigate() ">Shto shites</button>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource "  matSort>
+  <table mat-table [dataSource]="dataSource " matSort>
 
     <!-- ID Column -->
     <ng-container matColumnDef="id">
@@ -57,10 +57,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
-
   </table>
 
-  <mat-paginator [length]="count" [pageSize]="10" #paginator
+  <mat-paginator [length]="count" [pageSize]="10" #paginator (page)="getSellerList()"
   ></mat-paginator>
 
 </div>

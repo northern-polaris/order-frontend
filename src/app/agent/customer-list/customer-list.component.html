@@ -54,7 +54,7 @@
 
 
   </table>
-  <mat-paginator [length]="count" [pageSize]="10" #paginator
+  <mat-paginator [length]="count" [pageSize]="10" #paginator (page)="getCustomerList()"
   ></mat-paginator>
 
 </div>
