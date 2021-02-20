@@ -15,8 +15,9 @@ export class SellerListComponent implements OnInit {
   sellerList: any[] = [];
   pageSize = 10;
   count;
+  isChecked = true;
 
-  displayedColumns: string[] = ['id', 'username', 'first_name', 'last_name', 'email', 'update', 'delete'];
+  displayedColumns: string[] = ['id', 'username', 'first_name', 'last_name', 'email', 'is_active', 'update', 'delete'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,12 +36,22 @@ export class SellerListComponent implements OnInit {
   getSellerList(): void {
     this.sellerService.getSellerList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
       response => {
-        this.sellerList = response['results'];
-        this.count = response['count'];
-        this.dataSource = response['results'];
+        this.sellerList = response.results;
+        this.count = response.count;
+        this.dataSource = response.results;
       });
 
   }
+
+  isActiveChange(row): void {
+    const id = row.id;
+    const is_active = row.is_active;
+    this.sellerService.isActiveSeller({id, is_active}).subscribe(response => {
+      this.snackBar.open(response.message, 'close');
+    });
+
+  }
+
 
   navigate(): void {
     this.router.navigate(['seller/form']).then();

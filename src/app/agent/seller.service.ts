@@ -31,4 +31,8 @@ export class SellerService {
     return this.http.delete(environment.apiHost + `agent/seller/${id}/`);
   }
 
+  isActiveSeller(data): Observable<any> {
+    return this.http.post(environment.apiHost + `agent/seller/deactivate/`, data);
+  }
+
 }

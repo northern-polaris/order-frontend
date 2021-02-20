@@ -7,7 +7,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {CustomerListComponent} from './customer-list/customer-list.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {SellerFormComponent} from './seller-form/seller-form.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CustomerFormComponent} from './customer-form/customer-form.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {CustomerFormComponent} from './customer-form/customer-form.component';
     AgentRoutingModule,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     FlexLayoutModule,
     MatTableModule,
     MatPaginatorModule,
@@ -37,6 +39,8 @@ import {CustomerFormComponent} from './customer-form/customer-form.component';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
+
   ]
 })
 export class AgentModule {
