@@ -19,7 +19,7 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.getOrderUnit().subscribe(
+    this.orderService.getOrder().subscribe(
       response => {
         this.orderUnit = response;
       });

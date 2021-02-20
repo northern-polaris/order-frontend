@@ -1,0 +1,58 @@
+<form [formGroup]="orderForm" (ngSubmit)="submit()">
+
+  <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
+       [fxLayoutAlign]="'space-between center'">
+    <mat-form-field appearance="fill">
+      <mat-label>Customer</mat-label>
+      <mat-select formControlName="customer_id" required>
+        <mat-option *ngFor="let customer of customerList" [value]="customer.id">
+          {{customer.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <br>
+
+  <button mat-raised-button class="add-btn" type="button"
+          (click)="addOrderUnit()">
+    <mat-icon>queue</mat-icon>
+    Add Order Unit
+  </button>
+
+
+  <!--   Nested form Order Unit     -->
+  <div formArrayName="order_units" style="margin-top: 10px">
+    <div *ngFor="let order_unit of orderForm.get('order_units')['controls']; let i = index;"
+         [formGroupName]="i">
+
+
+      <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'20px'"
+           [fxLayoutAlign]="'space-around center'">
+        <mat-form-field appearance="fill">
+          <mat-label>Product</mat-label>
+          <mat-select formControlName="product_id" required>
+            <mat-option *ngFor="let product of productList" [value]="product.id">
+              {{product.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Amount" formControlName="amount" required>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+  <!--  End Nested form  Order Unit     -->
+
+  <button mat-flat-button class="add-btn" color="primary" type="submit">
+    <mat-icon>save</mat-icon>
+    Submit
+  </button>
+
+
+</form>
+

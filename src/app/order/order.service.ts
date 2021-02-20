@@ -11,10 +11,14 @@ export class OrderService {
   constructor(protected http: HttpClient) {
   }
 
-  getOrderUnit(): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'product/list/');
+  getOrder(): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'order/list/');
 
 
+  }
+
+  getOrderDependencies(): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'order/order-form-dependencies/');
   }
 
 }
