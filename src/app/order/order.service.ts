@@ -11,14 +11,27 @@ export class OrderService {
   constructor(protected http: HttpClient) {
   }
 
-  getOrder(): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'order/list/');
-
+  getOrder(pageIndex): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'order/list/' + `?page=${pageIndex + 1}`);
 
   }
 
-  getOrderDependencies(): Observable<any>{
+  putOrder(order): Observable<any> {
+    return this.http.put<any>(environment.apiHost + `order/order-form-dependencies/${order.id}/`, order);
+  }
+
+  postOrder(order): Observable<any> {
+    return this.http.post<any>(environment.apiHost + 'order/order-form-dependencies/', order);
+
+  }
+
+  getOrderDependencies(): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'order/order-form-dependencies/');
   }
+
+  deleteOrder(id): Observable<any> {
+    return this.http.delete(environment.apiHost + `order/list/${id}/`);
+  }
+
 
 }

@@ -13,6 +13,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   customerList: any[];
   productList: any[];
+  counter: number;
 
   constructor(public fb: FormBuilder,
               protected orderService: OrderService,
@@ -51,8 +52,37 @@ export class OrderFormComponent implements OnInit {
 
 
   submit(): void {
+    const serializedForm = Object.assign({}, this.orderForm.value);
+
+    if (this.counter) {
+      //  Update request
+      serializedForm.id = this.counter;
+      this.orderService.putOrder(serializedForm).subscribe(response => {
+        this.snackBar.open('Perditesimi u krye me sukses', 'close', {
+          duration: 5000,
+        });
+        this.router.navigate(['/order/list']).then();
+
+      });
+
+
+    } else {
+      //  Post request
+      this.orderService.postOrder(serializedForm).subscribe(response => {
+          this.snackBar.open('Shtimi u krye me sukses', 'close', {
+            duration: 5000,
+          });
+          this.router.navigate(['/order/list']).then();
+        },
+        onError => {
+          console.log(onError);
+        }
+      );
+    }
 
   }
 
-
 }
+
+
+
