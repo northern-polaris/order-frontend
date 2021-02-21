@@ -17,11 +17,11 @@ export class OrderService {
   }
 
   putOrder(order): Observable<any> {
-    return this.http.put<any>(environment.apiHost + `order/order-form-dependencies/${order.id}/`, order);
+    return this.http.put<any>(environment.apiHost + `order/list/${order.id}/`, order);
   }
 
   postOrder(order): Observable<any> {
-    return this.http.post<any>(environment.apiHost + 'order/order-form-dependencies/', order);
+    return this.http.post<any>(environment.apiHost + 'order/list/', order);
 
   }
 

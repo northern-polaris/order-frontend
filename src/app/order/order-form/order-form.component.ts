@@ -13,7 +13,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   customerList: any[];
   productList: any[];
-  counter: number;
+  id: number;
 
   constructor(public fb: FormBuilder,
               protected orderService: OrderService,
@@ -54,9 +54,9 @@ export class OrderFormComponent implements OnInit {
   submit(): void {
     const serializedForm = Object.assign({}, this.orderForm.value);
 
-    if (this.counter) {
+    if (this.id) {
       //  Update request
-      serializedForm.id = this.counter;
+      serializedForm.id = this.id;
       this.orderService.putOrder(serializedForm).subscribe(response => {
         this.snackBar.open('Perditesimi u krye me sukses', 'close', {
           duration: 5000,
