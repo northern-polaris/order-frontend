@@ -33,5 +33,9 @@ export class OrderService {
     return this.http.delete(environment.apiHost + `order/list/${id}/`);
   }
 
+  retrieveOrder(id): Observable<any> {
+    return this.http.get<any>(environment.apiHost + `order/list/${id}/`);
+  }
+
 
 }

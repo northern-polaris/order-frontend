@@ -29,6 +29,18 @@ export class OrderFormComponent implements OnInit {
       customer_id: ['', Validators.required],
       order_units: this.fb.array([])
     });
+    // get if from url
+    this.id = +this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.orderService.retrieveOrder(this.id).subscribe(response => {
+          for (const orderUnit of response['order_units']) {
+            this.addOrderUnit();
+          }
+          this.orderForm.patchValue(response);
+        }
+      );
+
+    }
   }
 
   addOrderUnit(): void {
