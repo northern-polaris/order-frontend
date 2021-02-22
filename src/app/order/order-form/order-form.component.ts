@@ -32,8 +32,8 @@ export class OrderFormComponent implements OnInit {
   }
 
   addOrderUnit(): void {
-    const orderUnit = this.orderForm.controls.order_units as FormArray;
-    orderUnit.push(this.orderUnitForm());
+    const orderUnits = this.orderForm.controls.order_units as FormArray;
+    orderUnits.push(this.orderUnitForm());
   }
 
   orderUnitForm(): FormGroup {
@@ -48,6 +48,13 @@ export class OrderFormComponent implements OnInit {
       this.customerList = response['customers'];
       this.productList = response['products'];
     });
+  }
+
+
+  removeOrderUnit(orderUnitIndex): void {
+    const orderUnits = this.orderForm.controls.order_units as FormArray;
+    orderUnits.removeAt(orderUnitIndex);
+
   }
 
 

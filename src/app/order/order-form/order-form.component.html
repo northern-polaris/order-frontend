@@ -23,6 +23,7 @@
 
   <!--   Nested form Order Unit     -->
   <div formArrayName="order_units" style="margin-top: 10px">
+
     <div *ngFor="let order_unit of orderForm.get('order_units')['controls']; let i = index;"
          [formGroupName]="i">
 
@@ -42,10 +43,18 @@
         <mat-form-field fxFlex>
           <input matInput placeholder="Amount" formControlName="amount" required>
         </mat-form-field>
+
+        <button mat-icon-button style="background-color:  #F36B1C; color: white"
+                (click)="removeOrderUnit(i)">
+          <mat-icon>remove</mat-icon>
+
+        </button>
       </div>
 
     </div>
   </div>
+
+
   <!--  End Nested form  Order Unit     -->
 
   <button mat-flat-button class="add-btn" color="primary" type="submit">
