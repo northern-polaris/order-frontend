@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('username', response.username);
         localStorage.setItem('groups', response.groups);
         console.log(response);
+        this.router.navigate(['order/list']).then();
 
       },
       onError => {

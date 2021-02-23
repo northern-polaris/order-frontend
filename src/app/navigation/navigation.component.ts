@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -11,8 +12,24 @@ export class NavigationComponent implements OnInit {
   sellerListPath = 'agent/seller/list';
   customerListPath = 'agent/customer/list';
   orderListPath = 'order/list';
+  isAdministrator: boolean;
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.isAdministrator = this.isLoggedIn();
+
+  }
+
+  isLoggedIn(): boolean {
+    const groups: string = localStorage.getItem('groups');
+    const userGroups: string[] = groups.split(',');
+    return userGroups.includes('Administrator');
+  }
+
+  logOut(): void {
+    localStorage.clear();
+    this.router.navigate(['login']).then();
+
+  }
 
   ngOnInit(): void {
   }
