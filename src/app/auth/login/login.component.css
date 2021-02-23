@@ -20,22 +20,3 @@ mat-card-content {
   justify-content: flex-end;
 }
 
-input[type="text" i] {
-  text-align: center;
-  padding: 2px 60px;
-}
-input[type="password" i] {
-  -webkit-text-security: disc !important;
-  text-align: center;
-  padding: 2px 60px;
-}
-
-.mat-card-title[_ngcontent-iar-c200] {
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 30px;
-}
-
-.mat-card {
-  background: whitesmoke;
-  color: darkslateblue ;
-}

@@ -6,9 +6,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'order-frontend';
-  productListPath = 'product/list';
-  sellerListPath = 'agent/seller/list';
-  customerListPath = 'agent/customer/list';
-  orderListPath = 'order/list';
+
 }
