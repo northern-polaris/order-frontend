@@ -32,10 +32,12 @@ export class LoginComponent implements OnInit {
     const serializedForm = Object.assign({}, this.loginForm.value);
 
     this.authService.postUser(serializedForm).subscribe(response => {
-        this.snackBar.open('Shtimi u krye me sukses', 'close', {
+        this.snackBar.open('Identifikimi u krye me sukses', 'close', {
           duration: 5000,
         });
         localStorage.setItem('token', response.token);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('groups', response.groups);
         console.log(response);
 
       },
