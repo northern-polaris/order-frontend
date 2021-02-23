@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+input[type="text" i] {
+  text-align: center;
+  padding: 2px 60px;
+}
+input[type="password" i] {
+  -webkit-text-security: disc !important;
+  text-align: center;
+  padding: 2px 60px;
+}
+
+.mat-card-title[_ngcontent-iar-c200] {
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 30px;
+}
+
+.mat-card {
+  background: whitesmoke;
+  color: darkslateblue ;
+}

@@ -3,9 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 
 
 const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
 
+  {path: '', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
-
   {path: 'order', loadChildren: () => import('./order/order.module').then(m => m.OrderModule)},
   {path: 'agent', loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)},
 
