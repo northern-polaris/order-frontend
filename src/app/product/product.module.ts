@@ -2,12 +2,11 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {ProductRoutingModule} from './product-routing.module';
-import {ProductListComponent} from './product-list/product-list.component';
-import {ProductItemComponent} from './product-list/product-item/product-item.component';
+import {ProductListComponent} from './_components/product/product-list/product-list.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
-import {ProductFormComponent} from './product-form/product-form.component';
+import {ProductFormComponent} from './_components/product/product-form/product-form.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -21,7 +20,7 @@ import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
-  declarations: [ProductListComponent, ProductItemComponent, ProductFormComponent,
+  declarations: [ProductListComponent, ProductFormComponent,
   ],
   imports: [
     CommonModule,
