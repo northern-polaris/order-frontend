@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SellerService} from '../../../_services/seller.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CustomerService} from '../customer.service';
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-customer-form',
-  templateUrl: './customer-form.component.html',
-  styleUrls: ['./customer-form.component.css']
+  selector: 'app-seller-form',
+  templateUrl: './seller-form.component.html',
+  styleUrls: ['./seller-form.component.css']
 })
-export class CustomerFormComponent implements OnInit {
-  customerForm: FormGroup;
+export class SellerFormComponent implements OnInit {
+  sellerForm: FormGroup;
   id: number;
 
   constructor(public fb: FormBuilder,
-              protected agentService: CustomerService,
+              protected agentService: SellerService,
               private snackBar: MatSnackBar,
               private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -24,50 +24,52 @@ export class CustomerFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerForm = this.fb.group({
+    this.sellerForm = this.fb.group({
+      username: ['', Validators.required],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      company_name: ['', Validators.required],
+      email: ['', Validators.required],
     });
 
     // get if from url
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
-      this.agentService.retrieveCustomer(this.id).subscribe(response => {
-          this.customerForm.patchValue(response);
+      this.agentService.retrieveSeller(this.id).subscribe(response => {
+          this.sellerForm.patchValue(response);
         }
       );
 
     }
+
+
   }
 
   backClicked(): void {
     this.location.back();
   }
 
-
   submit(): void {
-    const serializedForm = Object.assign({}, this.customerForm.value);
+    const serializedForm = Object.assign({}, this.sellerForm.value);
 
     if (this.id) {
       //  Update request
       serializedForm.id = this.id;
-      this.agentService.putCustomer(serializedForm).subscribe(response => {
+      this.agentService.putSeller(serializedForm).subscribe(response => {
         this.snackBar.open('Perditesimi u krye me sukses', 'close', {
           duration: 5000,
         });
-        this.router.navigate(['customer/list']).then();
+        this.router.navigate(['seller/list']).then();
 
       });
 
 
     } else {
       //  Post request
-      this.agentService.postCustomer(serializedForm).subscribe(response => {
+      this.agentService.postSeller(serializedForm).subscribe(response => {
           this.snackBar.open('Shtimi u krye me sukses', 'close', {
             duration: 5000,
           });
-          this.router.navigate(['customer/list']).then();
+          this.router.navigate(['seller/list']).then();
         },
         onError => {
           console.log(onError);
@@ -78,5 +80,3 @@ export class CustomerFormComponent implements OnInit {
 
 
 }
-
-
