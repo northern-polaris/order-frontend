@@ -54,12 +54,12 @@ export class SellerListComponent implements OnInit {
 
 
   navigate(): void {
-    this.router.navigate(['seller/form']).then();
+    this.router.navigate(['agent/seller/form']).then();
 
   }
 
   update(id): void {
-    this.router.navigate(['seller/form', id]).then();
+    this.router.navigate(['agent/seller/form', id]).then();
   }
 
   delete(id): void {

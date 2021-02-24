@@ -8,6 +8,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationComponent} from './navigation/navigation.component';
 import {AuthInterceptor} from './auth/interceptors/auth.interceptors';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import {AuthInterceptor} from './auth/interceptors/auth.interceptors';
     AgentModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
 
   ],
   providers: [

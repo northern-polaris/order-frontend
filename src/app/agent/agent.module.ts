@@ -19,6 +19,7 @@ import {SellerFormComponent} from './seller-form/seller-form.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CustomerFormComponent} from './customer-form/customer-form.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSelectModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    MatCardModule,
 
   ]
 })

@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatCardModule,
   ]
 })
 export class OrderModule {

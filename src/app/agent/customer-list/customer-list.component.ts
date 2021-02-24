@@ -44,12 +44,12 @@ export class CustomerListComponent implements OnInit {
   }
 
   navigate(): void {
-    this.router.navigate(['customer/form']).then();
+    this.router.navigate(['agent/customer/form']).then();
 
   }
 
   update(id): void {
-    this.router.navigate(['customer/form', id]).then();
+    this.router.navigate(['agent/customer/form', id]).then();
   }
 
   delete(id): void {

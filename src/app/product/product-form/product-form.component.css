@@ -1,9 +1,14 @@
 form {
-  width: 80%;
+  width: 60%;
 }
 
 .on-delete-snackbar {
 
   background: #6fca36;
 
+}
+
+
+.flexExpand {
+  flex: 1 1 auto;
 }

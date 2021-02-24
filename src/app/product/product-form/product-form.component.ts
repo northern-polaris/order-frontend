@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-product-form',
@@ -19,6 +20,7 @@ export class ProductFormComponent implements OnInit {
               private snackBar: MatSnackBar,
               private router: Router,
               private activatedRoute: ActivatedRoute,
+              private location: Location,
   ) {
   }
 
@@ -44,6 +46,10 @@ export class ProductFormComponent implements OnInit {
 
     }
 
+  }
+
+  backClicked(): void {
+    this.location.back();
   }
 
 

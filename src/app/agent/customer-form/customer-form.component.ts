@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../customer.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-customer-form',
@@ -17,7 +18,9 @@ export class CustomerFormComponent implements OnInit {
               protected agentService: CustomerService,
               private snackBar: MatSnackBar,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private location: Location,
+  ) {
   }
 
   ngOnInit(): void {
@@ -37,6 +40,11 @@ export class CustomerFormComponent implements OnInit {
 
     }
   }
+
+  backClicked(): void {
+    this.location.back();
+  }
+
 
   submit(): void {
     const serializedForm = Object.assign({}, this.customerForm.value);

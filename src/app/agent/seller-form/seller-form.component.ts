@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SellerService} from '../seller.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-seller-form',
@@ -17,7 +18,9 @@ export class SellerFormComponent implements OnInit {
               protected agentService: SellerService,
               private snackBar: MatSnackBar,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private location: Location,
+  ) {
   }
 
   ngOnInit(): void {
@@ -39,6 +42,10 @@ export class SellerFormComponent implements OnInit {
     }
 
 
+  }
+
+  backClicked(): void {
+    this.location.back();
   }
 
   submit(): void {

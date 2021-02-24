@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../order.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-oder-form',
@@ -20,6 +21,7 @@ export class OrderFormComponent implements OnInit {
               private snackBar: MatSnackBar,
               private router: Router,
               private activatedRoute: ActivatedRoute,
+              private location: Location,
   ) {
   }
 
@@ -75,6 +77,9 @@ export class OrderFormComponent implements OnInit {
     const orderUnits = this.orderForm.controls.order_units as FormArray;
     orderUnits.removeAt(orderUnitIndex);
 
+  }
+  backClicked(): void {
+    this.location.back();
   }
 
 

@@ -1,33 +1,63 @@
-<p>customer-form works!</p>
+<mat-toolbar>
+  <span>Shto Klient</span>
 
-<form [formGroup]="customerForm" (ngSubmit)="submit()">
-
-
-  <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
-       [fxLayoutAlign]="'space-between center'">
-    <mat-form-field fxFlex>
-      <input matInput placeholder="First Name" formControlName="first_name" required>
-    </mat-form-field>
-  </div>
-
-
-  <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
-       [fxLayoutAlign]="'space-between center'">
-    <mat-form-field fxFlex>
-      <input matInput placeholder="Last Name" formControlName="last_name" required>
-    </mat-form-field>
-  </div>
-
-  <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
-       [fxLayoutAlign]="'space-between center'">
-    <mat-form-field fxFlex>
-      <input matInput placeholder="Company Name" formControlName="company_name" required>
-    </mat-form-field>
-  </div>
-
-
-  <button mat-flat-button class="add-btn" color="primary" type="submit">
-    <mat-icon>save</mat-icon>
-    Submit
+  <span class="flexExpand"></span>
+  <button mat-raised-button style="background-color: aliceblue;  border: solid lightblue;  "
+          type="button"
+          (click)="backClicked()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Kthehu
   </button>
-</form>
+
+
+</mat-toolbar>
+
+<mat-card id="card" style="align-items: center">
+
+
+  <mat-card-content>
+
+    <form [formGroup]="customerForm" (ngSubmit)="submit()">
+
+
+      <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
+           [fxLayoutAlign]="'space-between center'">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="First Name" formControlName="first_name" required>
+        </mat-form-field>
+      </div>
+
+
+      <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
+           [fxLayoutAlign]="'space-between center'">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Last Name" formControlName="last_name" required>
+        </mat-form-field>
+      </div>
+
+      <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
+           [fxLayoutAlign]="'space-between center'">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Company Name" formControlName="company_name" required>
+        </mat-form-field>
+      </div>
+
+
+
+        <button mat-flat-button class="add-btn" style="background-color: aliceblue;  border: solid lightblue; "
+                type="submit">
+          <mat-icon>save</mat-icon>
+          Submit
+        </button>
+
+
+
+
+
+    </form>
+
+
+  </mat-card-content>
+
+
+</mat-card>

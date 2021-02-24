@@ -17,27 +17,29 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
   declarations: [ProductListComponent, ProductItemComponent, ProductFormComponent,
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        ProductRoutingModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule,
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    ProductRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatCardModule,
+  ]
 })
 export class ProductModule {
 }
