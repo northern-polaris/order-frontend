@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService} from '../order.service';
+import {OrderService} from '../../../_services/order.service';
 import {Location} from '@angular/common';
 
 @Component({
