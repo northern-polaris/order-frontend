@@ -24,11 +24,15 @@ export class OrderFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
     this.getOrderDependencies();
     this.orderForm = this.fb.group({
       customer_id: ['', Validators.required],
       order_units: this.fb.array([])
     });
+
+
     // get if from url
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
@@ -40,12 +44,10 @@ export class OrderFormComponent implements OnInit {
         }
       );
 
-    }
-  }
+    } else {
+      this.addOrderUnit();
 
-  addOrderUnit(): void {
-    const orderUnits = this.orderForm.controls.order_units as FormArray;
-    orderUnits.push(this.orderUnitForm());
+    }
   }
 
   orderUnitForm(): FormGroup {
@@ -54,6 +56,12 @@ export class OrderFormComponent implements OnInit {
       amount: ['', Validators.required],
     });
   }
+
+  addOrderUnit(): void {
+    const orderUnits = this.orderForm.controls.order_units as FormArray;
+    orderUnits.push(this.orderUnitForm());
+  }
+
 
   getOrderDependencies(): void {
     this.orderService.getOrderDependencies().subscribe(response => {
