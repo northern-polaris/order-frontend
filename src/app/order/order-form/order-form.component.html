@@ -35,9 +35,8 @@
       <br>
 
 
-
-
-      <button mat-raised-button class="add-btn" type="button" style="background-color: aliceblue;  border: solid lightblue; "
+      <button mat-raised-button class="add-btn" type="button"
+              style="background-color: aliceblue;  border: solid lightblue; "
               (click)="addOrderUnit()">
         <mat-icon>queue</mat-icon>
         Add Order Unit
@@ -55,16 +54,23 @@
                [fxLayoutAlign]="'space-around center'">
             <mat-form-field appearance="fill">
               <mat-label>Product</mat-label>
-              <mat-select formControlName="product_id" required>
+              <mat-select formControlName="product_id" (selectionChange)="onChangeOfProduct(order_unit)" required>
                 <mat-option *ngFor="let product of productList" [value]="product.id">
                   {{product.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
+            <!--   Amount  Input   -->
 
             <mat-form-field fxFlex>
               <input matInput placeholder="Amount" formControlName="amount" required>
+            </mat-form-field>
+
+            <!--   Price Input    -->
+
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Price" formControlName="price" readonly>
             </mat-form-field>
 
 
@@ -73,8 +79,6 @@
               <mat-icon>remove</mat-icon>
 
             </button>
-
-
 
 
           </div>

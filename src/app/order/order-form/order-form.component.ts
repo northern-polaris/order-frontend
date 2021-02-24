@@ -56,12 +56,28 @@ export class OrderFormComponent implements OnInit {
     return this.fb.group({
       product_id: ['', Validators.required],
       amount: ['', Validators.required],
+      price: ['', Validators.required]
     });
   }
 
   addOrderUnit(): void {
     const orderUnits = this.orderForm.controls.order_units as FormArray;
     orderUnits.push(this.orderUnitForm());
+  }
+
+  onChangeOfProduct(orderUnit): void {
+
+    const productId = orderUnit.value.product_id;
+    for (const product of this.productList) {
+
+      if (productId === product.id) {
+        orderUnit.controls['price'].setValue(product.price);
+
+      }
+    }
+
+    console.log(this.productList);
+    console.log(event);
   }
 
 
@@ -78,6 +94,7 @@ export class OrderFormComponent implements OnInit {
     orderUnits.removeAt(orderUnitIndex);
 
   }
+
   backClicked(): void {
     this.location.back();
   }
