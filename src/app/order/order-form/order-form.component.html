@@ -88,12 +88,18 @@
 
 
       <!--  End Nested form  Order Unit     -->
+      <span *ngIf="totalPrice">Cmimi total : {{totalPrice}}</span>
+      <br>
+      <br>
+
 
       <button mat-flat-button class="add-btn" style="background-color: aliceblue;  border: solid lightblue; "
               type="submit">
         <mat-icon>save</mat-icon>
         Submit
       </button>
+
+
 
 
     </form>

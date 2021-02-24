@@ -15,6 +15,7 @@ export class OrderFormComponent implements OnInit {
   customerList: any[];
   productList: any[];
   id: number;
+  totalPrice: number;
 
   constructor(public fb: FormBuilder,
               protected orderService: OrderService,
@@ -50,6 +51,7 @@ export class OrderFormComponent implements OnInit {
       this.addOrderUnit();
 
     }
+    this.onChangeOfOrderForm();
   }
 
   orderUnitForm(): FormGroup {
@@ -77,7 +79,18 @@ export class OrderFormComponent implements OnInit {
     }
 
     console.log(this.productList);
-    console.log(event);
+    console.log(orderUnit);
+  }
+
+  onChangeOfOrderForm(): void {
+    this.orderForm.valueChanges.subscribe(value => {
+
+      let total = 0;
+      for (const orderUnit of value.order_units) {
+        total = total + (orderUnit.price * orderUnit.amount);
+      }
+      this.totalPrice = total;
+    });
   }
 
 
