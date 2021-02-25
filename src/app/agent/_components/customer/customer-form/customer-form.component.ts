@@ -67,7 +67,7 @@ export class CustomerFormComponent implements OnInit {
           this.snackBar.open('Shtimi u krye me sukses', 'close', {
             duration: 5000,
           });
-          this.router.navigate(['customer/list']).then();
+          this.router.navigate(['agent/customer/list']).then();
         },
         onError => {
           console.log(onError);

@@ -1,5 +1,6 @@
 <mat-toolbar>
-  <span>Shto Porosi</span>
+  <span *ngIf="id">Perditeso Porosi</span>
+  <span *ngIf="!id">Shto Porosi</span>
 
   <span class="flexExpand"></span>
   <button mat-raised-button style="background-color: aliceblue;  border: solid lightblue;  "

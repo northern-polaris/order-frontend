@@ -1,5 +1,7 @@
 <mat-toolbar>
-  <span>Shto Shites</span>
+
+  <span *ngIf="id">Perditeso Shites</span>
+  <span *ngIf="!id">Shto Shites</span>
 
   <span class="flexExpand"></span>
   <button mat-raised-button style="background-color: aliceblue;  border: solid lightblue;  "

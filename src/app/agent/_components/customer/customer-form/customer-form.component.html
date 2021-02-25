@@ -1,5 +1,6 @@
 <mat-toolbar>
-  <span>Shto Klient</span>
+  <span *ngIf="id">Perditeso Klient</span>
+  <span *ngIf="!id">Shto Klient</span>
 
   <span class="flexExpand"></span>
   <button mat-raised-button style="background-color: aliceblue;  border: solid lightblue;  "

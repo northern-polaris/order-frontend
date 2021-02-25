@@ -69,7 +69,7 @@ export class SellerFormComponent implements OnInit {
           this.snackBar.open('Shtimi u krye me sukses', 'close', {
             duration: 5000,
           });
-          this.router.navigate(['seller/list']).then();
+          this.router.navigate(['agent/seller/list']).then();
         },
         onError => {
           console.log(onError);

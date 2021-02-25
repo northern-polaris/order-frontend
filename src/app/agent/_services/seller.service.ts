@@ -15,7 +15,7 @@ export class SellerService {
   }
 
   postSeller(seller): Observable<any> {
-    return this.http.post<any>(environment.apiHost + 'agent/seller/form/', seller);
+    return this.http.post<any>(environment.apiHost + 'agent/seller/', seller);
 
   }
 
