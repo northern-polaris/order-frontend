@@ -17,6 +17,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -38,7 +39,13 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     MatSnackBarModule,
     MatCardModule,
-  ]
+    MatDialogModule,
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MatDialogRef, useValue: {}}
+  ],
+
 })
 export class ProductModule {
 }

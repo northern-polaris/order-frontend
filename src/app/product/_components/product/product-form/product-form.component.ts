@@ -1,9 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../../../_services/product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
+export interface DialogData {
+  id: number;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-product-form',
@@ -21,6 +28,10 @@ export class ProductFormComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private location: Location,
+              // we use them when opened with mat dialog
+              public dialogRef: MatDialogRef<ProductFormComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData
+              // @Inject(MAT_DIALOG_DATA) public data: {id:number}
   ) {
   }
 
@@ -36,8 +47,17 @@ export class ProductFormComponent implements OnInit {
 
       }
     );
+
+
     // get id from url
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (this.data?.id) {
+      // get id from this.data if component is opened with dialog
+      this.id = this.data.id;
+    }
+
+
     if (this.id) {
       this.productService.retrieveProduct(this.id).subscribe(response => {
           this.productForm.patchValue(response);
@@ -63,7 +83,14 @@ export class ProductFormComponent implements OnInit {
         this.snackBar.open('Perditesimi u krye me sukses', 'close', {
           duration: 5000,
         });
-        this.router.navigate(['product/list']).then();
+
+        if (this.data?.id) {
+          this.dialogRef.close();
+          // this.dialogRef.close('heyyyyyyyyyyyyyyy');
+
+        } else {
+          this.router.navigate(['product/list']).then();
+        }
 
       });
 
@@ -74,7 +101,13 @@ export class ProductFormComponent implements OnInit {
           this.snackBar.open('Shtimi u krye me sukses', 'close', {
             duration: 5000,
           });
-          this.router.navigate(['product/list']).then();
+
+          if (this.data?.id) {
+            this.dialogRef.close();
+
+          } else {
+            this.router.navigate(['product/list']).then();
+          }
         },
         onError => {
           console.log(onError);
@@ -86,7 +119,7 @@ export class ProductFormComponent implements OnInit {
 
   getCategories(): void {
     this.productService.getCategoryList().subscribe(response => {
-      this.categories = response['results'];
+      this.categories = response.results;
 
     });
 

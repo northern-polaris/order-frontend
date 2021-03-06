@@ -5,6 +5,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {ProductFormComponent} from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-product-list',
@@ -28,7 +30,9 @@ export class ProductListComponent implements OnInit {
 
   constructor(protected productService: ProductService,
               private router: Router,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog,
+  ) {
   }
 
   ngOnInit(): void {
@@ -54,6 +58,19 @@ export class ProductListComponent implements OnInit {
   update(id): void {
     // this.router.navigate(['product/form'], id).then();
     this.router.navigate(['product/form', id]).then();
+  }
+
+  updateDialog(id): void {
+    const dialogRef = this.dialog.open(ProductFormComponent, {
+      width: '500px',
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      this.getProductList();
+
+    });
+
+
   }
 
 
