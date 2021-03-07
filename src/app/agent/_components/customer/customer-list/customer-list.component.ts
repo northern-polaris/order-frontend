@@ -5,6 +5,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {CustomerFormComponent} from '../customer-form/customer-form.component';
 
 @Component({
   selector: 'app-customer-list',
@@ -24,7 +26,9 @@ export class CustomerListComponent implements OnInit {
 
   constructor(protected customerService: CustomerService,
               private router: Router,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog,
+  ) {
   }
 
   ngOnInit(): void {
@@ -48,10 +52,31 @@ export class CustomerListComponent implements OnInit {
 
   }
 
-  update(id): void {
-    this.router.navigate(['agent/customer/form', id]).then();
+  addProduct(): void {
+    const dialogRef = this.dialog.open(CustomerFormComponent, {
+      width: '500px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      this.getCustomerList();
+
+    });
+
   }
 
+  update(id): void {
+    const dialogRef = this.dialog.open(CustomerFormComponent, {
+      width: '500px',
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      this.getCustomerList();
+
+    });
+  }
+
+
+  // todo delete function with dialog confirmation
   delete(id): void {
     this.customerService.deleteCustomer(id).subscribe(response => {
 

@@ -10,8 +10,8 @@ const routes: Routes = [
   {path: 'seller/form', component: SellerFormComponent},
   {path: 'seller/form/:id', component: SellerFormComponent},
   {path: 'customer/list', component: CustomerListComponent},
-  {path: 'customer/form', component: CustomerFormComponent},
-  {path: 'customer/form/:id', component: CustomerFormComponent},
+  // {path: 'customer/form', component: CustomerFormComponent},
+  // {path: 'customer/form/:id', component: CustomerFormComponent},
 
 
 ];

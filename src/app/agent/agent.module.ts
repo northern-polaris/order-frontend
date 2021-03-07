@@ -20,6 +20,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CustomerFormComponent} from './_components/customer/customer-form/customer-form.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -42,8 +43,14 @@ import {MatCardModule} from '@angular/material/card';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatDialogModule
 
-  ]
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MatDialogRef, useValue: {}}
+  ],
+
 })
 export class AgentModule {
 }
