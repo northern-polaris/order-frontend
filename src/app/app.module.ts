@@ -10,11 +10,14 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {AuthInterceptor} from './auth/interceptors/auth.interceptors';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {DeleteConfirmationComponent} from './delete-confirmation/delete-confirmation.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    DeleteConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +27,7 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule
 
   ],
   providers: [

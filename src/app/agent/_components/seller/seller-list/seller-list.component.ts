@@ -5,6 +5,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {DeleteConfirmationComponent} from '../../../../delete-confirmation/delete-confirmation.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-seller-list',
@@ -24,7 +26,10 @@ export class SellerListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(protected sellerService: SellerService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(protected sellerService: SellerService,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) {
 
   }
 
@@ -62,17 +67,31 @@ export class SellerListComponent implements OnInit {
     this.router.navigate(['agent/seller/form', id]).then();
   }
 
-  delete(id): void {
-    this.sellerService.deleteSeller(id).subscribe(response => {
+  deleteDialog(id): void {
 
-      this.snackBar.open('Perditesimi u krye me sukses', 'close', {
-        duration: 5000,
-        panelClass: ['on-delete-snackbar'],
-      });
-      // on_success deletion, we update table with updated data from backend
-      this.ngOnInit();
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '500px',
+    });
 
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+        //  do deletion
+        this.sellerService.deleteSeller(id).subscribe(response => {
+          this.snackBar.open('Fshirja u krye me sukses', 'close', {
+            duration: 5000,
+            panelClass: ['on-delete-snackbar'],
+          });
+          // on_success deletion, we update table with updated data from backend
+          this.getSellerList();
+        });
+      }
     });
   }
 
+
+
+
 }
+
