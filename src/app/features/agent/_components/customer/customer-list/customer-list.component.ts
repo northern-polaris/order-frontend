@@ -37,7 +37,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   getCustomerList(): void {
-    this.customerService.getCustomerList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
+    this.customerService.list({page: this.paginator ? this.paginator.pageIndex + 1 : 1}).subscribe(
       response => {
         this.customerList = response['result'];
         this.count = response['count'];
@@ -72,15 +72,8 @@ export class CustomerListComponent implements OnInit {
   }
 
   delete(id): void {
-    this.customerService.deleteCustomer(id).subscribe(response => {
-
-      this.snackBar.open('The action was performed successfully', 'close', {
-        duration: 5000,
-        panelClass: ['on-delete-snackbar'],
-      });
-      // on_success deletion, we update table with updated data from backend
+    this.customerService.delete(id).subscribe(response => {
       this.ngOnInit();
-
     });
   }
 

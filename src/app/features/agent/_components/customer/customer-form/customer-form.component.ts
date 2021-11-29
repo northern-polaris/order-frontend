@@ -34,12 +34,10 @@ export class CustomerFormComponent implements OnInit {
       company_name: ['', Validators.required],
     });
 
-
-    // get if data
     this.id = this.data.id;
 
     if (this.id) {
-      this.agentService.retrieveCustomer(this.id).subscribe(response => {
+      this.agentService.retrieve(this.id).subscribe(response => {
           this.customerForm.patchValue(response);
         }
       );
@@ -47,38 +45,20 @@ export class CustomerFormComponent implements OnInit {
     }
   }
 
-  backClicked(): void {
-    this.location.back();
-  }
-
-
   submit(): void {
     const serializedForm = Object.assign({}, this.customerForm.value);
 
     if (this.data?.id) {
-      //  Update request
       serializedForm.id = this.id;
-      this.agentService.putCustomer(serializedForm).subscribe(response => {
-        this.snackBar.open('The action was performed successfully', 'close', {
-          duration: 5000,
-        });
+      this.agentService.put(serializedForm).subscribe(response => {
         this.dialogRef.close();
-        // this.router.navigate(['customer/list']).then();
-
       });
 
 
     } else {
-      //  Post request
-      this.agentService.postCustomer(serializedForm).subscribe(response => {
-          this.snackBar.open('The action was performed successfully', 'close', {
-            duration: 5000,
-          });
+      this.agentService.post(serializedForm).subscribe(response => {
           this.dialogRef.close();
         },
-        onError => {
-          console.log(onError);
-        }
       );
     }
   }
