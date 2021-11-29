@@ -86,7 +86,7 @@ export class SellerListComponent implements OnInit {
 
   deleteDialog(id): void {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
-      width: '1000px',
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
