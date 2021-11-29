@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerFormComponent} from '../customer-form/customer-form.component';
+import {DeleteConfirmationComponent} from '../../../../../shared/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-customer-list',
@@ -72,9 +73,17 @@ export class CustomerListComponent implements OnInit {
   }
 
   delete(id): void {
-    this.customerService.delete(id).subscribe(response => {
-      this.ngOnInit();
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '1000px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.customerService.delete(id).subscribe(response => {
+          this.getCustomerList();
+        });
+      }
     });
   }
+
 
 }

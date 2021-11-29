@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ProductFormComponent} from '../product-form/product-form.component';
+import {DeleteConfirmationComponent} from '../../../../../shared/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-product-list',
@@ -76,9 +77,17 @@ export class ProductListComponent implements OnInit {
 
 
   delete(id): void {
-    this.productService.delete(id).subscribe(response => {
-      this.ngOnInit();
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '1000px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.productService.delete(id).subscribe(response => {
+          this.getProductList();
+        });
+      }
     });
   }
+  
 
 }
