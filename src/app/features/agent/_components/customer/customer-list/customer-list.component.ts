@@ -50,7 +50,7 @@ export class CustomerListComponent implements OnInit {
 
   addCustomer(): void {
     const dialogRef = this.dialog.open(CustomerFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: {}
     });
     dialogRef.afterClosed().subscribe(response => {
@@ -62,7 +62,7 @@ export class CustomerListComponent implements OnInit {
 
   update(id): void {
     const dialogRef = this.dialog.open(CustomerFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: {id}
     });
     dialogRef.afterClosed().subscribe(response => {
