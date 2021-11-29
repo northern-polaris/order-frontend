@@ -10,6 +10,7 @@ import {NavigationComponent} from './shared/navigation/navigation.component';
 import {AuthInterceptor} from './core/auth/interceptors/auth.interceptors';
 import {DeleteConfirmationComponent} from './shared/delete-confirmation/delete-confirmation.component';
 import {MaterialModule} from './shared/material/material.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {MaterialModule} from './shared/material/material.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MaterialModule,
   ],
   providers: [

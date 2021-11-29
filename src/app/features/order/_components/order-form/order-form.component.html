@@ -1,16 +1,6 @@
 <mat-toolbar>
   <span *ngIf="id">Update Order</span>
   <span *ngIf="!id">Add Order</span>
-
-  <span class="flexExpand"></span>
-  <button mat-raised-button style="background-color: aliceblue;  border: solid lightblue;  "
-          type="button"
-          (click)="backClicked()">
-    <mat-icon>keyboard_arrow_left</mat-icon>
-    Back
-  </button>
-
-
 </mat-toolbar>
 
 
@@ -51,8 +41,8 @@
              [formGroupName]="i">
 
 
-          <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'20px'"
-               [fxLayoutAlign]="'space-around center'">
+          <div class="row" [fxLayout]="'row'" [fxLayout.sm]="'column'" [fxLayoutGap]="'10px'"
+               [fxLayoutAlign]="'space-between center'">
             <mat-form-field appearance="fill">
               <mat-label>Product</mat-label>
               <mat-select formControlName="product_id" (selectionChange)="onChangeOfProduct(order_unit)" required>
@@ -61,6 +51,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+
 
             <!--   Amount  Input   -->
 

@@ -5,7 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {CustomerFormComponent} from '../../../agent/_components/customer/customer-form/customer-form.component';
 import {MatDialog} from '@angular/material/dialog';
 import {OrderFormComponent} from '../order-form/order-form.component';
 
@@ -56,7 +55,7 @@ export class OrderListComponent implements OnInit {
 
   addOrder(): void {
     const dialogRef = this.dialog.open(OrderFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: {}
     });
     dialogRef.afterClosed().subscribe(response => {

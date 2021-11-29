@@ -9,6 +9,7 @@ import {DeleteConfirmationComponent} from '../../../../../shared/delete-confirma
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerFormComponent} from '../../customer/customer-form/customer-form.component';
 import {SellerFormComponent} from '../seller-form/seller-form.component';
+import {ProductFormComponent} from '../../../../product/_components/product/product-form/product-form.component';
 
 @Component({
   selector: 'app-seller-list',
@@ -62,7 +63,7 @@ export class SellerListComponent implements OnInit {
 
   addSeller(): void {
     const dialogRef = this.dialog.open(SellerFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: {}
     });
     dialogRef.afterClosed().subscribe(response => {
@@ -72,18 +73,21 @@ export class SellerListComponent implements OnInit {
 
   }
 
-
-  update(id): void {
-    this.router.navigate(['agent/seller/form', id]).then();
+  updateSeller(id): void {
+    const dialogRef = this.dialog.open(SellerFormComponent, {
+      width: '1000px',
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      this.getSellerList();
+    });
   }
 
+
   deleteDialog(id): void {
-
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
-      width: '500px',
+      width: '1000px',
     });
-
-
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
@@ -99,8 +103,6 @@ export class SellerListComponent implements OnInit {
       }
     });
   }
-
-
 
 
 }

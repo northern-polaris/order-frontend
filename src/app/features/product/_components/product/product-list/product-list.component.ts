@@ -53,7 +53,7 @@ export class ProductListComponent implements OnInit {
 
   addProduct(): void {
     const dialogRef = this.dialog.open(ProductFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: {}
     });
     dialogRef.afterClosed().subscribe(response => {
@@ -66,15 +66,12 @@ export class ProductListComponent implements OnInit {
 
   updateDialog(id): void {
     const dialogRef = this.dialog.open(ProductFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: {id}
     });
     dialogRef.afterClosed().subscribe(response => {
       this.getProductList();
-
     });
-
-
   }
 
 

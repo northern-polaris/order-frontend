@@ -1,10 +1,10 @@
 <div class="topnav">
 
   <div class="col-md-12" *ngIf="isAdministrator">
-    <a [routerLink]="sellerListPath">Shites</a>
-    <a [routerLink]="customerListPath">Kliente</a>
-    <a [routerLink]="productListPath">Produkte</a>
-    <a [routerLink]="orderListPath">Porosi</a>
+    <a [routerLink]="sellerListPath">Seller</a>
+    <a [routerLink]="customerListPath">Customer</a>
+    <a [routerLink]="productListPath">Products</a>
+    <a [routerLink]="orderListPath">Order</a>
 
 
     <a style='float: right; cursor: pointer' (click)="logOut()">
@@ -14,9 +14,9 @@
   </div>
 
   <div class="col-md-12" *ngIf="!isAdministrator">
-    <a [routerLink]="customerListPath">Kliente</a>
-    <a [routerLink]="productListPath">Produkte</a>
-    <a [routerLink]="orderListPath">Porosi</a>
+    <a [routerLink]="customerListPath">Customer</a>
+    <a [routerLink]="productListPath">Products</a>
+    <a [routerLink]="orderListPath">Order</a>
 
 
     <a style='float: right; cursor: pointer' (click)="logOut()">
