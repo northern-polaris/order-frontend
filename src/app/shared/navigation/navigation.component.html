@@ -1,7 +1,16 @@
-<div class="topnav">
+<section class="navbar">
+  <nav class="col-md-12" *ngIf="isAdministrator">
+    <a class="nav-link" [routerLink]="sellerListPath" [routerLinkActive]="'active'">Seller</a>
+    <a class="nav-link" [routerLink]="customerListPath" [routerLinkActive]="'active'">Customer</a>
+    <a class="nav-link" [routerLink]="productListPath" [routerLinkActive]="'active'">Products</a>
+    <a class="nav-link" [routerLink]="orderListPath" [routerLinkActive]="'active'">Order</a>
+    <a style='float: right; cursor: pointer' (click)="logOut()">
+      <mat-icon>power_settings_new</mat-icon>
+    </a>
 
-  <div class="col-md-12" *ngIf="isAdministrator">
-    <a [routerLink]="sellerListPath">Seller</a>
+  </nav>
+
+  <nav class="col-md-12" *ngIf="!isAdministrator">
     <a [routerLink]="customerListPath">Customer</a>
     <a [routerLink]="productListPath">Products</a>
     <a [routerLink]="orderListPath">Order</a>
@@ -11,21 +20,30 @@
       <mat-icon>power_settings_new</mat-icon>
     </a>
 
-  </div>
+  </nav>
 
-  <div class="col-md-12" *ngIf="!isAdministrator">
-    <a [routerLink]="customerListPath">Customer</a>
-    <a [routerLink]="productListPath">Products</a>
-    <a [routerLink]="orderListPath">Order</a>
+</section>
 
+<!--<nav class="navbar navbar-expand-lg">-->
+<!--  <a class="navbar-brand">Order Management</a>-->
+<!--  <div class="collapse navbar-collapse" id="navbarText" style="float: right">-->
+<!--    <ul class="navbar-nav mr-auto">-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link" [routerLink]="['agent','seller','list']" [routerLinkActive]="'active'">Seller</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" [routerLink]="['cv', 'customer','list']" [routerLinkActive]="'active'">Costumer</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" [routerLink]="['products', 'list']" [routerLinkActive]="'active'">Products</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" [routerLink]="['order', 'list']" [routerLinkActive]="'active'">Order</a>-->
+<!--      </li>-->
+<!--    </ul>-->
 
-    <a style='float: right; cursor: pointer' (click)="logOut()">
-      <mat-icon>power_settings_new</mat-icon>
-    </a>
-
-  </div>
-
-</div>
+<!--  </div>-->
+<!--</nav>-->
 
 
 <router-outlet></router-outlet>
