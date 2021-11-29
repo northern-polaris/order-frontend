@@ -1,9 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SellerService} from '../../../_services/seller.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogData} from '../../../../product/_components/product/product-form/product-form.component';
 
@@ -18,10 +15,6 @@ export class SellerFormComponent implements OnInit {
 
   constructor(public fb: FormBuilder,
               protected agentService: SellerService,
-              private snackBar: MatSnackBar,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private location: Location,
               public dialogRef: MatDialogRef<SellerFormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
@@ -47,30 +40,26 @@ export class SellerFormComponent implements OnInit {
 
   }
 
-  backClicked(): void {
-    this.location.back();
-  }
 
   submit(): void {
     const serializedForm = Object.assign({}, this.sellerForm.value);
 
-    if (this.id) {
-      if (this.data?.id) {
-        serializedForm.id = this.id;
-        this.agentService.put(serializedForm).subscribe(response => {
+
+    if (this.data?.id) {
+      serializedForm.id = this.id;
+      this.agentService.put(serializedForm).subscribe(response => {
+        this.dialogRef.close();
+      });
+
+
+    } else {
+      this.agentService.post(serializedForm).subscribe(response => {
           this.dialogRef.close();
-        });
-
-
-      } else {
-        this.agentService.postSeller(serializedForm).subscribe(response => {
-            this.dialogRef.close();
-          },
-          onError => {
-            console.log(onError);
-          }
-        );
-      }
+        },
+        onError => {
+          console.log(onError);
+        }
+      );
     }
 
 

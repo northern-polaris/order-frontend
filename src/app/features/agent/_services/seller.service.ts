@@ -15,10 +15,6 @@ export class SellerService extends GenericService {
     super(http, matSnackBar, 'agent/seller/');
   }
 
-  postSeller(seller): Observable<any> {
-    return this.http.post<any>(environment.apiHost + 'agent/seller/', seller);
-  }
-
   isActiveSeller(data): Observable<any> {
     return this.http.post(environment.apiHost + `agent/seller/deactivate/`, data);
   }
