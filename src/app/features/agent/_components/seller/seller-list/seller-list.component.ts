@@ -7,9 +7,8 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {DeleteConfirmationComponent} from '../../../../../shared/delete-confirmation/delete-confirmation.component';
 import {MatDialog} from '@angular/material/dialog';
-import {CustomerFormComponent} from '../../customer/customer-form/customer-form.component';
 import {SellerFormComponent} from '../seller-form/seller-form.component';
-import {ProductFormComponent} from '../../../../product/_components/product/product-form/product-form.component';
+import {Seller} from '../../../_models/seller';
 
 @Component({
   selector: 'app-seller-list',
@@ -17,13 +16,12 @@ import {ProductFormComponent} from '../../../../product/_components/product/prod
   styleUrls: ['./seller-list.component.css']
 })
 export class SellerListComponent implements OnInit {
-  sellerList: any[] = [];
-  pageSize = 10;
+  sellerList: Seller[] = [];
   count;
   isChecked = true;
 
   displayedColumns: string[] = ['id', 'username', 'first_name', 'last_name', 'email', 'is_active', 'update', 'delete'];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<Seller>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -42,11 +40,11 @@ export class SellerListComponent implements OnInit {
   }
 
   getSellerList(): void {
-    this.sellerService.list({page: this.paginator ? this.paginator.pageIndex + 1 : 1}).subscribe(
+    this.sellerService.list<Seller>({page: this.paginator ? this.paginator.pageIndex + 1 : 1}).subscribe(
       response => {
         this.sellerList = response.results;
         this.count = response.count;
-        this.dataSource = response.results;
+        this.dataSource = new MatTableDataSource<Seller>(this.sellerList);
       });
 
   }

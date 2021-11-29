@@ -5,6 +5,14 @@ import {environment} from '../../../environments/environment';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
+export interface BEResponse<T> {
+  count: number;
+  next: number;
+  previous: number;
+  results: T[];
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -63,7 +71,7 @@ export class GenericService {
     );
   }
 
-  list<T>(params: object = {}, url?: string): Observable<Array<T> | any> {
+  list<T>(params: object = {}, url?: string): Observable<BEResponse<T | any>> {
     const endpoint = url ? url : this.endpoint;
     const queryParams = this.generateHttpParams(params);
     const options = {params: queryParams};

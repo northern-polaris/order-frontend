@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {OrderService} from '../../_services/order.service';
-import {Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {OrderFormComponent} from '../order-form/order-form.component';
 import {DeleteConfirmationComponent} from '../../../../shared/delete-confirmation/delete-confirmation.component';
+import {Order, OrderUnit} from '../../_model/order';
+import {Customer} from '../../../agent/_models/customer';
 
 @Component({
   selector: 'app-order-list',
@@ -15,27 +15,19 @@ import {DeleteConfirmationComponent} from '../../../../shared/delete-confirmatio
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
-
-  orderUnit: any[];
-
-
-  pageSize = 10;
+  orderUnit: OrderUnit[];
   count;
-
-
   displayedColumns: string[] = ['code', 'code_year', 'date_registered', 'customer_id', 'creator_id', 'update', 'delete'];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<Order>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private orderService: OrderService,
-    private router: Router,
-    private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
-    this.orderUnit = [1, 2, 3, 4];
+    this.orderUnit = [];
   }
 
   ngOnInit(): void {
@@ -48,7 +40,7 @@ export class OrderListComponent implements OnInit {
       response => {
         this.orderUnit = response.results;
         this.count = response.count;
-        this.dataSource = response.results;
+        this.dataSource = new MatTableDataSource<Order>(response.results);
       });
   }
 

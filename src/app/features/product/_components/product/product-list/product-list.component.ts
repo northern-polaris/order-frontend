@@ -8,6 +8,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ProductFormComponent} from '../product-form/product-form.component';
 import {DeleteConfirmationComponent} from '../../../../../shared/delete-confirmation/delete-confirmation.component';
+import {Product} from '../../../models/product';
+import {Customer} from '../../../../agent/_models/customer';
 
 @Component({
   selector: 'app-product-list',
@@ -17,12 +19,8 @@ import {DeleteConfirmationComponent} from '../../../../../shared/delete-confirma
 export class ProductListComponent implements OnInit {
 
   categoryList: string[];
-  productList: any[];
-
-  pageSize = 10;
+  productList: Product[];
   count;
-
-
   displayedColumns: string[] = ['id', 'name', 'default_price', 'description', 'product_category', 'update', 'delete'];
   dataSource: MatTableDataSource<any>;
 
@@ -30,8 +28,6 @@ export class ProductListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(protected productService: ProductService,
-              private router: Router,
-              private snackBar: MatSnackBar,
               public dialog: MatDialog,
   ) {
   }
@@ -46,7 +42,7 @@ export class ProductListComponent implements OnInit {
       response => {
         this.productList = response.results;
         this.count = response.count;
-        this.dataSource = response.results;
+        this.dataSource = new MatTableDataSource<Product>(this.productList);
       });
 
   }
