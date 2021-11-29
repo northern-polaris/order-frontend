@@ -3,15 +3,13 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AgentModule} from './agent/agent.module';
+import {AgentModule} from './features/agent/agent.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NavigationComponent} from './navigation/navigation.component';
-import {AuthInterceptor} from './auth/interceptors/auth.interceptors';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {DeleteConfirmationComponent} from './delete-confirmation/delete-confirmation.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {NavigationComponent} from './shared/navigation/navigation.component';
+import {AuthInterceptor} from './core/auth/interceptors/auth.interceptors';
+import {DeleteConfirmationComponent} from './shared/delete-confirmation/delete-confirmation.component';
+import {MaterialModule} from './shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -22,13 +20,9 @@ import {MatDialogModule} from '@angular/material/dialog';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgentModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule
-
+    MaterialModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
