@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SellerService} from '../../../_services/seller.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DialogData} from '../../../../product/_components/product/product-form/product-form.component';
 
 @Component({
   selector: 'app-seller-form',
@@ -20,6 +22,8 @@ export class SellerFormComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private location: Location,
+              public dialogRef: MatDialogRef<SellerFormComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
   }
 
@@ -31,10 +35,9 @@ export class SellerFormComponent implements OnInit {
       email: ['', Validators.required],
     });
 
-    // get if from url
-    this.id = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.id = this.data.id;
     if (this.id) {
-      this.agentService.retrieveSeller(this.id).subscribe(response => {
+      this.agentService.retrieve(this.id).subscribe(response => {
           this.sellerForm.patchValue(response);
         }
       );
@@ -52,31 +55,24 @@ export class SellerFormComponent implements OnInit {
     const serializedForm = Object.assign({}, this.sellerForm.value);
 
     if (this.id) {
-      //  Update request
-      serializedForm.id = this.id;
-      this.agentService.putSeller(serializedForm).subscribe(response => {
-        this.snackBar.open('The action was performed successfully', 'close', {
-          duration: 5000,
+      if (this.data?.id) {
+        serializedForm.id = this.id;
+        this.agentService.put(serializedForm).subscribe(response => {
+          this.dialogRef.close();
         });
-        this.router.navigate(['seller/list']).then();
-
-      });
 
 
-    } else {
-      //  Post request
-      this.agentService.postSeller(serializedForm).subscribe(response => {
-          this.snackBar.open('The action was performed successfully', 'close', {
-            duration: 5000,
-          });
-          this.router.navigate(['agent/seller/list']).then();
-        },
-        onError => {
-          console.log(onError);
-        }
-      );
+      } else {
+        this.agentService.postSeller(serializedForm).subscribe(response => {
+            this.dialogRef.close();
+          },
+          onError => {
+            console.log(onError);
+          }
+        );
+      }
     }
+
+
   }
-
-
 }

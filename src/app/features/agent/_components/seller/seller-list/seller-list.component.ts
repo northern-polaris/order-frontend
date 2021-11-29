@@ -42,7 +42,7 @@ export class SellerListComponent implements OnInit {
   }
 
   getSellerList(): void {
-    this.sellerService.getSellerList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
+    this.sellerService.list({page: this.paginator ? this.paginator.pageIndex + 1 : 1}).subscribe(
       response => {
         this.sellerList = response.results;
         this.count = response.count;
@@ -89,15 +89,8 @@ export class SellerListComponent implements OnInit {
       width: '1000px',
     });
     dialogRef.afterClosed().subscribe(result => {
-
       if (result === true) {
-        //  do deletion
-        this.sellerService.deleteSeller(id).subscribe(response => {
-          this.snackBar.open('The action was performed successfully', 'close', {
-            duration: 5000,
-            panelClass: ['on-delete-snackbar'],
-          });
-          // on_success deletion, we update table with updated data from backend
+        this.sellerService.delete(id).subscribe(response => {
           this.getSellerList();
         });
       }

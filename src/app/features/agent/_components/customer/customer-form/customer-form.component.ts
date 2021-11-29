@@ -18,10 +18,6 @@ export class CustomerFormComponent implements OnInit {
 
   constructor(public fb: FormBuilder,
               protected agentService: CustomerService,
-              private snackBar: MatSnackBar,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private location: Location,
               public dialogRef: MatDialogRef<CustomerFormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {

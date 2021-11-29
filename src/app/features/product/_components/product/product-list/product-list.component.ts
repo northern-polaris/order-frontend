@@ -41,11 +41,11 @@ export class ProductListComponent implements OnInit {
   }
 
   getProductList(): void {
-    this.productService.getProductList(this.paginator ? this.paginator.pageIndex : 0).subscribe(
+    this.productService.list({page: this.paginator ? this.paginator.pageIndex + 1 : 1}).subscribe(
       response => {
-        this.productList = response['results'];
-        this.count = response['count'];
-        this.dataSource = response['results'];
+        this.productList = response.results;
+        this.count = response.count;
+        this.dataSource = response.results;
       });
 
   }
@@ -76,15 +76,8 @@ export class ProductListComponent implements OnInit {
 
 
   delete(id): void {
-    this.productService.deleteProduct(id).subscribe(response => {
-
-      this.snackBar.open('The action was performed successfully', 'close', {
-        duration: 5000,
-        panelClass: ['on-delete-snackbar'],
-      });
-      // on_success deletion, we update table with updated data from backend
+    this.productService.delete(id).subscribe(response => {
       this.ngOnInit();
-
     });
   }
 

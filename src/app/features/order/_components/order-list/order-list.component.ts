@@ -43,14 +43,12 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrderList(): void {
-    this.orderService.getOrder(this.paginator ? this.paginator.pageIndex : 0).subscribe(
+    this.orderService.list({page: this.paginator ? this.paginator.pageIndex + 1 : 1}).subscribe(
       response => {
-        this.orderUnit = response['results'];
-        this.count = response['count'];
-        this.dataSource = response['results'];
-        console.log('heyyy');
+        this.orderUnit = response.results;
+        this.count = response.count;
+        this.dataSource = response.results;
       });
-    console.log('heyyyoooooooooooooooo');
   }
 
   addOrder(): void {
@@ -67,20 +65,20 @@ export class OrderListComponent implements OnInit {
 
 
   update(id): void {
-    this.router.navigate(['order/form', id]).then();
+    const dialogRef = this.dialog.open(OrderFormComponent, {
+      width: '1000px',
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      this.getOrderList();
+
+    });
   }
 
 
   delete(id): void {
-    this.orderService.deleteOrder(id).subscribe(response => {
-
-      this.snackBar.open('The action was performed successfully', 'close', {
-        duration: 5000,
-        panelClass: ['on-delete-snackbar'],
-      });
-      // on_success deletion, we update table with updated data from backend
+    this.orderService.delete(id).subscribe(response => {
       this.ngOnInit();
-
     });
   }
 

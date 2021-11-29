@@ -17,6 +17,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -26,7 +27,6 @@ import {MatCardModule} from '@angular/material/card';
     OrderRoutingModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-
 
 
     MatTableModule,
@@ -40,7 +40,12 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     MatSnackBarModule,
     MatCardModule,
-  ]
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MatDialogRef, useValue: {}}
+  ],
+
 })
 export class OrderModule {
 }

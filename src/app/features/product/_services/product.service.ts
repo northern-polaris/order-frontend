@@ -2,38 +2,22 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
+import {GenericService} from '../../../core/service/generic.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService extends GenericService {
 
-  constructor(protected http: HttpClient) {
-  }
-
-  getProductList(pageIndex): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'product/list/' + `?page=${pageIndex + 1}`);
-  }
-
-  postProduct(product): Observable<any> {
-    return this.http.post<any>(environment.apiHost + 'product/list/', product);
-
+  constructor(protected http: HttpClient,
+              protected matSnackBar: MatSnackBar,
+  ) {
+    super(http, matSnackBar, 'product/list/');
   }
 
   getCategoryList(): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'product/list/category/');
-  }
-
-  retrieveProduct(id): Observable<any> {
-    return this.http.get<any>(environment.apiHost + `product/list/${id}/`);
-  }
-
-  putProduct(product): Observable<any> {
-    return this.http.put<any>(environment.apiHost + `product/list/${product.id}/`, product);
-  }
-
-  deleteProduct(id): Observable<any> {
-    return this.http.delete(environment.apiHost + `product/list/${id}/`);
   }
 
 }

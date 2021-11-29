@@ -58,7 +58,7 @@ export class ProductFormComponent implements OnInit {
 
 
     if (this.id) {
-      this.productService.retrieveProduct(this.id).subscribe(response => {
+      this.productService.retrieve(this.id).subscribe(response => {
           this.productForm.patchValue(response);
         }
       );
@@ -67,25 +67,15 @@ export class ProductFormComponent implements OnInit {
 
   }
 
-  backClicked(): void {
-    this.location.back();
-  }
-
 
   submit(): void {
     const serializedForm = Object.assign({}, this.productForm.value);
 
     if (this.id) {
-      //  Update request
       serializedForm.id = this.id;
-      this.productService.putProduct(serializedForm).subscribe(response => {
-        this.snackBar.open('The action was performed successfully', 'close', {
-          duration: 5000,
-        });
-
+      this.productService.put(serializedForm).subscribe(response => {
         if (this.data?.id) {
           this.dialogRef.close();
-          // this.dialogRef.close('heyyyyyyyyyyyyyyy');
 
         } else {
           this.router.navigate(['product/list']).then();
@@ -95,22 +85,9 @@ export class ProductFormComponent implements OnInit {
 
 
     } else {
-      //  Post request
-      this.productService.postProduct(serializedForm).subscribe(response => {
-          this.snackBar.open('The action was performed successfully', 'close', {
-            duration: 5000,
-          });
-
-          if (this.data?.id) {
-            this.dialogRef.close();
-
-          } else {
-            this.router.navigate(['product/list']).then();
-          }
+      this.productService.post(serializedForm).subscribe(response => {
+          this.dialogRef.close();
         },
-        onError => {
-          console.log(onError);
-        }
       );
     }
 

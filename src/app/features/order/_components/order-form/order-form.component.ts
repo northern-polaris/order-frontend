@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {OrderService} from '../../_services/order.service';
-import {Location} from '@angular/common';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DialogData} from '../../../product/_components/product/product-form/product-form.component';
 
 @Component({
   selector: 'app-oder-form',
@@ -21,8 +22,8 @@ export class OrderFormComponent implements OnInit {
               protected orderService: OrderService,
               private snackBar: MatSnackBar,
               private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private location: Location,
+              public dialogRef: MatDialogRef<OrderFormComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
   }
 
@@ -35,11 +36,10 @@ export class OrderFormComponent implements OnInit {
       order_units: this.fb.array([])
     });
 
+    this.id = this.data.id;
 
-    // get if from url
-    this.id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
-      this.orderService.retrieveOrder(this.id).subscribe(response => {
+      this.orderService.retrieve(this.id).subscribe(response => {
           for (const orderUnit of response['order_units']) {
             this.addOrderUnit();
           }
@@ -73,7 +73,7 @@ export class OrderFormComponent implements OnInit {
     for (const product of this.productList) {
 
       if (productId === product.id) {
-        orderUnit.controls['price'].setValue(product.price);
+        orderUnit.controls.price.setValue(product.price);
 
       }
     }
@@ -96,8 +96,8 @@ export class OrderFormComponent implements OnInit {
 
   getOrderDependencies(): void {
     this.orderService.getOrderDependencies().subscribe(response => {
-      this.customerList = response['customers'];
-      this.productList = response['products'];
+      this.customerList = response.customers;
+      this.productList = response.products;
     });
   }
 
@@ -108,33 +108,20 @@ export class OrderFormComponent implements OnInit {
 
   }
 
-  backClicked(): void {
-    this.location.back();
-  }
-
 
   submit(): void {
     const serializedForm = Object.assign({}, this.orderForm.value);
 
     if (this.id) {
-      //  Update request
       serializedForm.id = this.id;
-      this.orderService.putOrder(serializedForm).subscribe(response => {
-        this.snackBar.open('The action was performed successfully', 'close', {
-          duration: 5000,
-        });
-        this.router.navigate(['/order/list']).then();
-
+      this.orderService.put(serializedForm).subscribe(response => {
+        this.dialogRef.close();
       });
 
 
     } else {
-      //  Post request
-      this.orderService.postOrder(serializedForm).subscribe(response => {
-          this.snackBar.open('The action was performed successfully', 'close', {
-            duration: 5000,
-          });
-          this.router.navigate(['/order/list']).then();
+      this.orderService.post(serializedForm).subscribe(response => {
+          this.dialogRef.close();
         },
         onError => {
           console.log(onError);
